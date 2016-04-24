@@ -13,21 +13,27 @@ if [ $yn == "Y" ] || [ $yn == "y" ]; then
 	echo "update"
 	echo "=================================================="
 	echo "Adding unofficial repository into /etc/pacman.conf"
+	arch=$(uname -m)
+	sudo cp /etc/pacman.conf /etc/pacman.conf.bak
+	echo "" >> /etc/pacman.conf
+	echo "[archlinuxfr]" >> /etc/pacman.conf
+	echo "SigLevel = Never" >> /etc/pacman.conf
+	echo "Server = http://repo.archlinux.fr/$arch" >> /etc/pacman.conf
+	# sudo pacman -Syyuu 
+	echo "Finish !!"
+
+	echo "================================================="
+	echo "Install yaourt, pacman alternative app for arch  "
 	read -p "do you wanna continue this part? [y/n] : " yn;
 		if [ $yn == "Y" ] || [ $yn == "y" ]; then
-		arch=$(uname -m)
-		sudo cp /etc/pacman.conf /etc/pacman.conf.bak
-		echo "" >> /etc/pacman.conf
-		echo "[archlinuxfr]" >> /etc/pacman.conf
-		echo "SigLevel = Never" >> /etc/pacman.conf
-		echo "Server = http://repo.archlinux.fr/$arch" >> /etc/pacman.conf
-	
-	echo "Finish !!"
-	# sudo pacman -Syyuu 
-	tail -f /etc/pacman.conf
+			# sudo pacman -S yaourt --noconfirm
+			echo "install pacman"
 		else
-			echo "no"
+			echo "tidak menginstal"
 		fi
+	echo "Lanjut script"
+
+
 elif [ $yn == "N" ] || [ $yn == "n" ]; then
 	echo "tidak"
 else
